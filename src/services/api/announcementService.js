@@ -2,6 +2,10 @@ import { toast } from "react-toastify";
 
 class AnnouncementService {
   constructor() {
+    if (!window.ApperSDK) {
+      throw new Error('ApperSDK not loaded. Make sure the SDK script is included.');
+    }
+    
     const { ApperClient } = window.ApperSDK;
     this.apperClient = new ApperClient({
       apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
