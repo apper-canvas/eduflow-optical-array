@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "title": "Algebra Quiz 1",
+    "description": "Basic algebraic equations and functions",
+    "maxScore": 100,
+    "dueDate": "2024-01-15",
+    "classId": 1,
+    "category": "quiz"
+  },
+  {
+    "Id": 2,
+    "title": "Biology Lab Report",
+    "description": "Cell structure and function analysis",
+    "maxScore": 100,
+    "dueDate": "2024-01-20",
+    "classId": 2,
+    "category": "lab"
+  },
+  {
+    "Id": 3,
+    "title": "History Essay",
+    "description": "World War II impact analysis",
+    "maxScore": 100,
+    "dueDate": "2024-01-25",
+    "classId": 3,
+    "category": "essay"
+  },
+  {
+    "Id": 4,
+    "title": "Chemistry Midterm",
+    "description": "Comprehensive chemistry exam",
+    "maxScore": 150,
+    "dueDate": "2024-02-01",
+    "classId": 4,
+    "category": "exam"
+  },
+  {
+    "Id": 5,
+    "title": "Literature Analysis",
+    "description": "Shakespeare's Hamlet character study",
+    "maxScore": 100,
+    "dueDate": "2024-02-05",
+    "classId": 5,
+    "category": "essay"
+  },
+  {
+    "Id": 6,
+    "title": "Physics Problem Set",
+    "description": "Newton's laws and motion problems",
+    "maxScore": 80,
+    "dueDate": "2024-02-10",
+    "classId": 6,
+    "category": "homework"
+  }
+]

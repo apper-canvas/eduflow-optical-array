@@ -1,0 +1,90 @@
+[
+  {
+    "Id": 1,
+    "firstName": "Emma",
+    "lastName": "Johnson",
+    "email": "emma.johnson@email.com",
+    "phone": "(555) 123-4567",
+    "grade": 10,
+    "parentId": 1,
+    "enrollmentDate": "2024-09-01",
+    "status": "active"
+  },
+  {
+    "Id": 2,
+    "firstName": "Liam",
+    "lastName": "Williams",
+    "email": "liam.williams@email.com",
+    "phone": "(555) 234-5678",
+    "grade": 11,
+    "parentId": 2,
+    "enrollmentDate": "2024-09-01",
+    "status": "active"
+  },
+  {
+    "Id": 3,
+    "firstName": "Olivia",
+    "lastName": "Brown",
+    "email": "olivia.brown@email.com",
+    "phone": "(555) 345-6789",
+    "grade": 9,
+    "parentId": 3,
+    "enrollmentDate": "2024-09-01",
+    "status": "active"
+  },
+  {
+    "Id": 4,
+    "firstName": "Noah",
+    "lastName": "Davis",
+    "email": "noah.davis@email.com",
+    "phone": "(555) 456-7890",
+    "grade": 12,
+    "parentId": 4,
+    "enrollmentDate": "2024-09-01",
+    "status": "active"
+  },
+  {
+    "Id": 5,
+    "firstName": "Ava",
+    "lastName": "Miller",
+    "email": "ava.miller@email.com",
+    "phone": "(555) 567-8901",
+    "grade": 10,
+    "parentId": 5,
+    "enrollmentDate": "2024-09-01",
+    "status": "pending"
+  },
+  {
+    "Id": 6,
+    "firstName": "Ethan",
+    "lastName": "Wilson",
+    "email": "ethan.wilson@email.com",
+    "phone": "(555) 678-9012",
+    "grade": 11,
+    "parentId": 6,
+    "enrollmentDate": "2024-08-15",
+    "status": "active"
+  },
+  {
+    "Id": 7,
+    "firstName": "Sophia",
+    "lastName": "Moore",
+    "email": "sophia.moore@email.com",
+    "phone": "(555) 789-0123",
+    "grade": 9,
+    "parentId": 7,
+    "enrollmentDate": "2024-09-01",
+    "status": "active"
+  },
+  {
+    "Id": 8,
+    "firstName": "Mason",
+    "lastName": "Taylor",
+    "email": "mason.taylor@email.com",
+    "phone": "(555) 890-1234",
+    "grade": 12,
+    "parentId": 8,
+    "enrollmentDate": "2024-09-01",
+    "status": "inactive"
+  }
+]

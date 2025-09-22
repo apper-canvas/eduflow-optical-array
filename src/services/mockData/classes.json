@@ -1,0 +1,71 @@
+[
+  {
+    "Id": 1,
+    "name": "Algebra II",
+    "teacherId": 1,
+    "schedule": {
+      "Monday": ["09:00", "10:00"],
+      "Wednesday": ["09:00", "10:00"],
+      "Friday": ["09:00", "10:00"]
+    },
+    "room": "A201",
+    "studentIds": [1, 2, 5, 7]
+  },
+  {
+    "Id": 2,
+    "name": "Biology",
+    "teacherId": 2,
+    "schedule": {
+      "Tuesday": ["10:00", "11:00"],
+      "Thursday": ["10:00", "11:00"]
+    },
+    "room": "B105",
+    "studentIds": [1, 2, 6, 8]
+  },
+  {
+    "Id": 3,
+    "name": "World History",
+    "teacherId": 3,
+    "schedule": {
+      "Monday": ["11:00", "12:00"],
+      "Wednesday": ["11:00", "12:00"],
+      "Friday": ["11:00", "12:00"]
+    },
+    "room": "C301",
+    "studentIds": [3, 4, 7, 8]
+  },
+  {
+    "Id": 4,
+    "name": "Chemistry",
+    "teacherId": 4,
+    "schedule": {
+      "Tuesday": ["13:00", "14:00"],
+      "Thursday": ["13:00", "14:00"]
+    },
+    "room": "B203",
+    "studentIds": [3, 4, 5, 6]
+  },
+  {
+    "Id": 5,
+    "name": "English Literature",
+    "teacherId": 5,
+    "schedule": {
+      "Monday": ["14:00", "15:00"],
+      "Wednesday": ["14:00", "15:00"],
+      "Friday": ["14:00", "15:00"]
+    },
+    "room": "A102",
+    "studentIds": [1, 3, 5, 7]
+  },
+  {
+    "Id": 6,
+    "name": "Physics",
+    "teacherId": 6,
+    "schedule": {
+      "Tuesday": ["15:00", "16:00"],
+      "Thursday": ["15:00", "16:00"]
+    },
+    "room": "B301",
+    "studentIds": [2, 4, 6, 8]
+  }
+]
