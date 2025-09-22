@@ -315,5 +315,3 @@ class AttendanceService {
 }
 
 export const attendanceService = new AttendanceService();
-
-export const attendanceService = new AttendanceService();
