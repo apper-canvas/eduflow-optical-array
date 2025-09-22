@@ -22,7 +22,7 @@ const Students = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
   
-  const [newStudent, setNewStudent] = useState({
+const [newStudent, setNewStudent] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -58,10 +58,10 @@ const Students = () => {
     let filtered = [...students];
     
     if (searchTerm) {
-      filtered = filtered.filter(student =>
-        student.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.email.toLowerCase().includes(searchTerm.toLowerCase())
+filtered = filtered.filter(student =>
+        student.first_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.last_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.email_c?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     
@@ -119,12 +119,12 @@ const Students = () => {
     }
   };
 
-  const handleViewDetails = (student) => {
-    toast.info(`Viewing details for ${student.firstName} ${student.lastName}`);
+const handleViewDetails = (student) => {
+    toast.info(`Viewing details for ${student.first_name_c} ${student.last_name_c}`);
   };
 
-  const handleDeleteStudent = async (student) => {
-    if (!confirm(`Are you sure you want to delete ${student.firstName} ${student.lastName}?`)) {
+const handleDeleteStudent = async (student) => {
+    if (!confirm(`Are you sure you want to delete ${student.first_name_c} ${student.last_name_c}?`)) {
       return;
     }
     
@@ -252,7 +252,7 @@ const Students = () => {
               <div className="grid grid-cols-2 gap-4">
                 <Input
                   label="First Name"
-                  value={newStudent.firstName}
+value={newStudent.firstName}
                   onChange={(e) => setNewStudent({...newStudent, firstName: e.target.value})}
                   required
                 />
@@ -283,7 +283,7 @@ const Students = () => {
                 <Select
                   label="Grade"
                   options={gradeOptions}
-                  value={newStudent.grade}
+value={newStudent.grade}
                   onChange={(e) => setNewStudent({...newStudent, grade: parseInt(e.target.value)})}
                 />
                 <Select

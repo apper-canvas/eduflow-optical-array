@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
-
+import { AuthContext } from "../../App";
 const Header = ({ title, onMenuClick, showMenu = true }) => {
   const [showNotifications, setShowNotifications] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  const authMethods = useContext(AuthContext);
 
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-40">
@@ -64,14 +67,29 @@ const Header = ({ title, onMenuClick, showMenu = true }) => {
               </div>
             )}
           </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-              A
-            </div>
-            <div className="hidden sm:block">
-              <p className="text-sm font-medium text-gray-900">Admin User</p>
-              <p className="text-xs text-secondary">Administrator</p>
+<div className="flex items-center gap-4">
+            <Button
+              variant="outline"
+              size="small"
+              onClick={() => authMethods?.logout()}
+              className="flex items-center gap-2"
+            >
+              <ApperIcon name="LogOut" className="h-4 w-4" />
+              Logout
+            </Button>
+            
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                {user?.firstName ? user.firstName.charAt(0) : 'U'}
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-sm font-medium text-gray-900">
+                  {user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : 'User'}
+                </p>
+                <p className="text-xs text-secondary">
+                  {user?.accounts?.[0]?.companyName || 'EduFlow User'}
+                </p>
+              </div>
             </div>
           </div>
         </div>

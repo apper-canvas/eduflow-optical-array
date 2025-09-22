@@ -1,15 +1,15 @@
 import Card from "@/components/atoms/Card";
-import Badge from "@/components/atoms/Badge";
 import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
 import ApperIcon from "@/components/ApperIcon";
 
 const StudentCard = ({ student, onViewDetails, onEdit }) => {
   const getStatusVariant = (status) => {
-    switch (status.toLowerCase()) {
-      case "active": return "success";
-      case "inactive": return "error";
-      case "pending": return "warning";
-      default: return "default";
+    switch (status) {
+      case 'active': return 'success';
+      case 'inactive': return 'secondary';
+      case 'pending': return 'warning';
+      default: return 'secondary';
     }
   };
 
@@ -18,33 +18,35 @@ const StudentCard = ({ student, onViewDetails, onEdit }) => {
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-lg">
-            {student.firstName.charAt(0)}{student.lastName.charAt(0)}
+            {student.first_name_c?.charAt(0) || 'S'}
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900">
-              {student.firstName} {student.lastName}
+            <h3 className="text-lg font-semibold text-gray-900">
+              {student.first_name_c} {student.last_name_c}
             </h3>
-            <p className="text-sm text-secondary">Grade {student.grade}</p>
+            <p className="text-sm text-gray-600">Grade {student.grade_c}</p>
           </div>
         </div>
-        <Badge variant={getStatusVariant(student.status)}>
-          {student.status}
+        <Badge variant={getStatusVariant(student.status_c)}>
+          {student.status_c}
         </Badge>
       </div>
 
       <div className="space-y-2 mb-4">
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <ApperIcon name="Mail" className="h-4 w-4" />
-          {student.email}
+          <span className="truncate">{student.email_c}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <ApperIcon name="Phone" className="h-4 w-4" />
-          {student.phone}
+          <span>{student.phone_c}</span>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <ApperIcon name="Calendar" className="h-4 w-4" />
-          Enrolled: {new Date(student.enrollmentDate).toLocaleDateString()}
-        </div>
+        {student.enrollment_date_c && (
+          <div className="flex items-center gap-2 text-sm text-gray-600">
+            <ApperIcon name="Calendar" className="h-4 w-4" />
+            <span>Enrolled: {new Date(student.enrollment_date_c).toLocaleDateString()}</span>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
@@ -55,14 +57,16 @@ const StudentCard = ({ student, onViewDetails, onEdit }) => {
           className="flex-1"
         >
           <ApperIcon name="Eye" className="h-4 w-4 mr-2" />
-          View Details
+          View
         </Button>
         <Button
-          variant="ghost"
+          variant="outline"
           size="small"
           onClick={() => onEdit(student)}
+          className="flex-1"
         >
-          <ApperIcon name="Edit" className="h-4 w-4" />
+          <ApperIcon name="Edit" className="h-4 w-4 mr-2" />
+          Edit
         </Button>
       </div>
     </Card>
