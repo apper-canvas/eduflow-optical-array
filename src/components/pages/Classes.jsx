@@ -112,11 +112,10 @@ const Classes = () => {
     }
   };
 
-  const getStudentName = (studentId) => {
+const getStudentName = (studentId) => {
     const student = students.find(s => s.Id === studentId);
-    return student ? `${student.firstName} ${student.lastName}` : "Unknown";
+    return student ? `${student.first_name_c} ${student.last_name_c}` : "Unknown";
   };
-
   const getScheduleDisplay = (schedule) => {
     if (!schedule) return "No schedule set";
     
@@ -295,8 +294,8 @@ const Classes = () => {
                           }
                         }}
                         className="rounded"
-                      />
-                      {student.firstName} {student.lastName}
+/>
+                      {student.first_name_c} {student.last_name_c}
                     </label>
                   ))}
                 </div>

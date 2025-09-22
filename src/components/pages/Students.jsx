@@ -90,9 +90,16 @@ filtered = filtered.filter(student =>
     }
   };
 
-  const handleEditStudent = (student) => {
+const handleEditStudent = (student) => {
     setEditingStudent(student);
-    setNewStudent(student);
+    setNewStudent({
+      firstName: student.first_name_c,
+      lastName: student.last_name_c,
+      email: student.email_c,
+      phone: student.phone_c,
+      grade: student.grade_c,
+      status: student.status_c
+    });
     setShowAddModal(true);
   };
 
