@@ -1,4 +1,6 @@
 import { toast } from "react-toastify";
+import React from "react";
+import Error from "@/components/ui/Error";
 
 class StudentService {
   constructor() {
@@ -14,29 +16,25 @@ class StudentService {
     try {
       const params = {
         fields: [
-          {"field": {"Name": "Name"}},
           {"field": {"Name": "first_name_c"}},
           {"field": {"Name": "last_name_c"}},
           {"field": {"Name": "email_c"}},
           {"field": {"Name": "phone_c"}},
           {"field": {"Name": "grade_c"}},
-          {"field": {"Name": "parent_id_c"}},
-          {"field": {"Name": "enrollment_date_c"}},
-          {"field": {"Name": "status_c"}},
-          {"field": {"Name": "Tags"}}
+          {"field": {"Name": "status_c"}}
         ],
-        orderBy: [{"fieldName": "Id", "sorttype": "DESC"}],
-        pagingInfo: {"limit": 1000, "offset": 0}
+        orderBy: [{"fieldName": "first_name_c", "sorttype": "ASC"}],
+        pagingInfo: {"limit": 100, "offset": 0}
       };
-      
+
       const response = await this.apperClient.fetchRecords(this.tableName, params);
       
       if (!response.success) {
-        console.error(`Failed to fetch students: ${response.message}`);
+        console.error(response.message);
         toast.error(response.message);
         return [];
       }
-      
+
       return response.data || [];
     } catch (error) {
       console.error("Error fetching students:", error?.response?.data?.message || error);
@@ -49,170 +47,149 @@ class StudentService {
     try {
       const params = {
         fields: [
-          {"field": {"Name": "Name"}},
           {"field": {"Name": "first_name_c"}},
           {"field": {"Name": "last_name_c"}},
           {"field": {"Name": "email_c"}},
           {"field": {"Name": "phone_c"}},
           {"field": {"Name": "grade_c"}},
-          {"field": {"Name": "parent_id_c"}},
-          {"field": {"Name": "enrollment_date_c"}},
-          {"field": {"Name": "status_c"}},
-          {"field": {"Name": "Tags"}}
+          {"field": {"Name": "status_c"}}
         ]
       };
+
+      const response = await this.apperClient.getRecordById(this.tableName, id, params);
       
-      const response = await this.apperClient.getRecordById(this.tableName, parseInt(id), params);
-      
-      if (!response.success) {
-        console.error(`Failed to fetch student ${id}: ${response.message}`);
-        toast.error(response.message);
+      if (!response?.data) {
         return null;
       }
-      
+
       return response.data;
     } catch (error) {
       console.error(`Error fetching student ${id}:`, error?.response?.data?.message || error);
-      toast.error("Failed to load student");
       return null;
     }
   }
 
   async create(studentData) {
     try {
-      const params = {
-        records: [{
-          Name: `${studentData.firstName} ${studentData.lastName}`,
-          first_name_c: studentData.firstName,
-          last_name_c: studentData.lastName,
-          email_c: studentData.email,
-          phone_c: studentData.phone,
-          grade_c: parseInt(studentData.grade),
-          parent_id_c: studentData.parent_id || null,
-          enrollment_date_c: studentData.enrollmentDate || new Date().toISOString().split('T')[0],
-          status_c: studentData.status || "active",
-          Tags: studentData.tags || ""
-        }]
+      // Format data for database field names
+      const formattedData = {
+        first_name_c: studentData.firstName,
+        last_name_c: studentData.lastName,
+        email_c: studentData.email,
+        phone_c: studentData.phone,
+        grade_c: parseInt(studentData.grade),
+        status_c: studentData.status
       };
-      
+
+      const params = {
+        records: [formattedData]
+      };
+
       const response = await this.apperClient.createRecord(this.tableName, params);
-      
+
       if (!response.success) {
-        console.error(`Failed to create student: ${response.message}`);
+        console.error(response.message);
         toast.error(response.message);
-        return null;
+        throw new Error(response.message);
       }
-      
+
       if (response.results) {
         const successful = response.results.filter(r => r.success);
         const failed = response.results.filter(r => !r.success);
-        
+
         if (failed.length > 0) {
-          console.error(`Failed to create ${failed.length} students: ${JSON.stringify(failed)}`);
+          console.error(`Failed to create student:`, failed);
           failed.forEach(record => {
-            record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error.message}`));
             if (record.message) toast.error(record.message);
           });
+          throw new Error("Failed to create student");
         }
-        
-        if (successful.length > 0) {
-          toast.success("Student created successfully!");
-          return successful[0].data;
-        }
+
+        return successful[0]?.data;
       }
-      return null;
     } catch (error) {
       console.error("Error creating student:", error?.response?.data?.message || error);
-      toast.error("Failed to create student");
-      return null;
+      throw error;
     }
   }
 
   async update(id, studentData) {
     try {
-      const params = {
-        records: [{
-          Id: parseInt(id),
-          Name: `${studentData.firstName} ${studentData.lastName}`,
-          first_name_c: studentData.firstName,
-          last_name_c: studentData.lastName,
-          email_c: studentData.email,
-          phone_c: studentData.phone,
-          grade_c: parseInt(studentData.grade),
-          parent_id_c: studentData.parent_id || null,
-          enrollment_date_c: studentData.enrollmentDate,
-          status_c: studentData.status,
-          Tags: studentData.tags || ""
-        }]
+      // Format data for database field names
+      const formattedData = {
+        Id: id,
+        first_name_c: studentData.firstName,
+        last_name_c: studentData.lastName,
+        email_c: studentData.email,
+        phone_c: studentData.phone,
+        grade_c: parseInt(studentData.grade),
+        status_c: studentData.status
       };
-      
+
+      const params = {
+        records: [formattedData]
+      };
+
       const response = await this.apperClient.updateRecord(this.tableName, params);
-      
+
       if (!response.success) {
-        console.error(`Failed to update student: ${response.message}`);
+        console.error(response.message);
         toast.error(response.message);
-        return null;
+        throw new Error(response.message);
       }
-      
+
       if (response.results) {
         const successful = response.results.filter(r => r.success);
         const failed = response.results.filter(r => !r.success);
-        
+
         if (failed.length > 0) {
-          console.error(`Failed to update ${failed.length} students: ${JSON.stringify(failed)}`);
+          console.error(`Failed to update student:`, failed);
           failed.forEach(record => {
-            record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error.message}`));
             if (record.message) toast.error(record.message);
           });
+          throw new Error("Failed to update student");
         }
-        
-        if (successful.length > 0) {
-          toast.success("Student updated successfully!");
-          return successful[0].data;
-        }
+
+        return successful[0]?.data;
       }
-      return null;
     } catch (error) {
       console.error("Error updating student:", error?.response?.data?.message || error);
-      toast.error("Failed to update student");
-      return null;
+      throw error;
     }
   }
 
   async delete(id) {
     try {
-      const params = { 
-        RecordIds: [parseInt(id)]
+      const params = {
+        RecordIds: [id]
       };
-      
+
       const response = await this.apperClient.deleteRecord(this.tableName, params);
-      
+
       if (!response.success) {
-        console.error(`Failed to delete student: ${response.message}`);
+        console.error(response.message);
         toast.error(response.message);
         return false;
       }
-      
+
       if (response.results) {
         const successful = response.results.filter(r => r.success);
         const failed = response.results.filter(r => !r.success);
-        
+
         if (failed.length > 0) {
-          console.error(`Failed to delete ${failed.length} students: ${JSON.stringify(failed)}`);
+          console.error(`Failed to delete student:`, failed);
           failed.forEach(record => {
             if (record.message) toast.error(record.message);
           });
+          return false;
         }
-        
-        if (successful.length > 0) {
-          toast.success("Student deleted successfully!");
-          return true;
-        }
+
+        return successful.length > 0;
       }
-      return false;
+
+      return true;
     } catch (error) {
       console.error("Error deleting student:", error?.response?.data?.message || error);
-      toast.error("Failed to delete student");
       return false;
     }
   }
