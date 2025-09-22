@@ -10,14 +10,6 @@ class AttendanceService {
     this.tableName = 'attendance_c';
   }
 
-constructor() {
-    const { ApperClient } = window.ApperSDK;
-    this.apperClient = new ApperClient({
-      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
-      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
-    });
-    this.tableName = 'attendance_c';
-  }
 
   async getAll() {
     try {
